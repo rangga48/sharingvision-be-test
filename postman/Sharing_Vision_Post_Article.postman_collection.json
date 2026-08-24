@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "a5e8f49a-1123-4c9b-9876-sharingvision2023",
+		"name": "Sharing Vision - Post Article API",
+		"description": "Postman Collection for Sharing Vision Backend Test - Use Case: Post Article",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create Article (Success)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Pengembangan Microservice Golang yang Scalable dan Robust\",\n  \"content\": \"Microservice merupakan pendekatan arsitektur di mana aplikasi dibagi menjadi komponen-komponen kecil yang saling berkomunikasi melalui API. Golang sangat cocok untuk microservice karena memiliki concurrency yang tinggi, performa luar biasa, serta konsumsi memori yang sangat efisien dalam skala besar.\",\n  \"category\": \"Technology\",\n  \"status\": \"publish\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/article/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						""
+					]
+				},
+				"description": "Membuat article baru (Title min 20 char, Content min 200 char, Category min 3 char, Status: publish/draft/thrash)"
+			},
+			"response": []
+		},
+		{
+			"name": "2. Create Article (Validation Error Example)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Judul Pendek\",\n  \"content\": \"Konten terlalu pendek\",\n  \"category\": \"IT\",\n  \"status\": \"invalid_status\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/article/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						""
+					]
+				},
+				"description": "Contoh request gagal validasi (Title < 20, Content < 200, Status invalid)"
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get Articles List (Paging)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/10/0",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"10",
+						"0"
+					]
+				},
+				"description": "Menampilkan seluruh article di database dengan paging (limit: 10, offset: 0)"
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get Article Detail by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				},
+				"description": "Menampilkan article dengan ID yang di-request"
+			},
+			"response": []
+		},
+		{
+			"name": "5. Update Article by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Update Pengenalan Golang Microservice Versi Terbaru 2023\",\n  \"content\": \"Pembaruan materi mengenai arsitektur microservice dengan Golang. Dalam artikel ini dipaparkan penjelasan mendalam mengenai penggunaan framework Gin, ORM GORM, serta mekanisme migrasi basis data MySQL secara otomatis dan terstruktur untuk pengujian sistem backend yang andal.\",\n  \"category\": \"Backend Engineering\",\n  \"status\": \"publish\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/article/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				},
+				"description": "Merubah data article dengan ID yang di-request"
+			},
+			"response": []
+		},
+		{
+			"name": "6. Delete Article by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/article/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"article",
+						"1"
+					]
+				},
+				"description": "Menghapus data article dengan ID yang di-request"
+			},
+			"response": []
+		}
+	],
+	"event": [],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
